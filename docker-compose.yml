@@ -1,0 +1,55 @@
+version: '3'
+services:
+
+  # PHP Service
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: laravel-app
+    container_name: laravel-app
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:8080"
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+
+  # MySQL Service
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    # environment:
+    #   MYSQL_ROOT_PASSWORD: root
+    #   MYSQL_DATABASE: db
+    #   MYSQL_USER: user
+    #   MYSQL_PASSWORD: password
+    env_file:
+      - ./.env
+    networks:
+      - app-network
+
+  # Redis Service
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+# Networks
+networks:
+  app-network:
+    driver: bridge
+
+#　マイグレーションのコマンドは「Docker exec laravel-app php artisan migrate」。

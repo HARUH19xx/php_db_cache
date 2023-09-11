@@ -8,7 +8,8 @@ PHP/Laravelで作成されたアプリケーションにデータベースとキ
 
 注意点<br>
 1.　php.iniを確認する。必要な依存関係のコメントアウトを外す。<br>
-2.　JSONをパースしない限り、文字化けする。そこで、サーバー側でパースするとき、コントローラーのreturn()の中でパースしてから送ることができる。<br>
+2.　Laravelでは基本的にapp/Http/*に書き込むことになる。<br>
+3.　JSONをパースしない限り、文字化けする。そこで、サーバー側でパースするとき、コントローラーのreturnの中でパースしてから送ることができる。<br>
 　　例：
 
     ```php
@@ -18,8 +19,8 @@ PHP/Laravelで作成されたアプリケーションにデータベースとキ
         }
     ```
 
-3.　Dockerfileで「pdo」、「pdo_mysql」等をインストールしておく。<br>
-4.　src/database/migrationsにマイグレーションファイルを作成しておく。<br>
+4.　Dockerfileで「pdo」、「pdo_mysql」等をインストールしておく。<br>
+5.　database/migrationsにマイグレーションファイルを作成しておく。<br>
 
 <!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
